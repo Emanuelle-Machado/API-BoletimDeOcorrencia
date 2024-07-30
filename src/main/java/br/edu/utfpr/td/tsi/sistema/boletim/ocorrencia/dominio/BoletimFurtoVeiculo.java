@@ -1,6 +1,8 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 public class BoletimFurtoVeiculo {
+	
+	private String idBoletimFurtoVeiculo;
 	private String identificador;
 	private String dataOcorrencia;
 	private String periodoOcorrencia;
@@ -8,6 +10,12 @@ public class BoletimFurtoVeiculo {
 	private Endereco localOcorrencia;
 	private Veiculo veiculoFurtado;
 	
+	public String getIdBoletimFurtoVeiculo() {
+		return idBoletimFurtoVeiculo;
+	}
+	public void setIdBoletimFurtoVeiculo(String idBoletimFurtoVeiculo) {
+		this.idBoletimFurtoVeiculo = idBoletimFurtoVeiculo;
+	}
 	public String getIdentificador() {
 		return identificador;
 	}

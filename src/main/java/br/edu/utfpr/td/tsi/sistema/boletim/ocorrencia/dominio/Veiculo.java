@@ -1,14 +1,20 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 public class Veiculo {
+	
+	private String idVeiculo;
 	private String anoFabricacao;
 	private String cor;
 	private String marca;
 	private String tipoVeiculo;
 	private Emplacamento emplacamento;
 	
-	
-	
+	public String getIdVeiculo() {
+		return idVeiculo;
+	}
+	public void setIdVeiculo(String idVeiculo) {
+		this.idVeiculo = idVeiculo;
+	}
 	public String getAnoFabricacao() {
 		return anoFabricacao;
 	}

@@ -1,12 +1,20 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 public class Endereco {
+	
+	private String idEndereco;
 	private String logradouro;
 	private int numero;
 	private String bairro;
 	private String cidade;
 	private String estado;
 	
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+	public void setIdEndereco(String idEndereco) {
+		this.idEndereco = idEndereco;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}

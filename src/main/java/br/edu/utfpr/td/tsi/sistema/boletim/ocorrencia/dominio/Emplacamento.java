@@ -1,10 +1,20 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 public class Emplacamento {
+	
+	private String idEmplacamento;
 	private String placa;
 	private String estado;
 	private String cidade;
 	
+	
+	
+	public String getIdEmplacamento() {
+		return idEmplacamento;
+	}
+	public void setIdEmplacamento(String idEmplacamento) {
+		this.idEmplacamento = idEmplacamento;
+	}
 	public String getPlaca() {
 		return placa;
 	}

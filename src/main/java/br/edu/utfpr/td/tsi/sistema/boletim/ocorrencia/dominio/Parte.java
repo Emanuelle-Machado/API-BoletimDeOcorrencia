@@ -1,11 +1,20 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 public class Parte {
+	
+	private String idParte;
 	private String nome;
 	private String email;
 	private String telefone;
 	private String tipoEnvolvimento;
 	
+	
+	public String getIdParte() {
+		return idParte;
+	}
+	public void setIdParte(String idParte) {
+		this.idParte = idParte;
+	}
 	public String getNome() {
 		return nome;
 	}
