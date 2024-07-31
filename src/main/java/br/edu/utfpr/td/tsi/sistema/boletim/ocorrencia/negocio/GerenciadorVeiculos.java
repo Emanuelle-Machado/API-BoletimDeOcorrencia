@@ -31,8 +31,7 @@ public class GerenciadorVeiculos implements RegrasVeiculos {
 
 	@Override
 	public List<Veiculo> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return veiculoDAO.listarTodos();
 	}
 
 	@Override
