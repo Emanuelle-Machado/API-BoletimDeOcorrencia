@@ -6,7 +6,6 @@ import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.negocio.RegrasVeiculos;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.representacao.VeiculoRep;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -28,12 +27,12 @@ public class ListaVeiculosEndpoint {
 		VeiculoRep veiculoCadastrado = new VeiculoRep(veiculoDominio);
 		return Response.ok(veiculoCadastrado).build();
 	}
-	
+	/*
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response carregarListaVeiculos() {
-		return null;
-	}
+		
+	}*/
 }
 
 

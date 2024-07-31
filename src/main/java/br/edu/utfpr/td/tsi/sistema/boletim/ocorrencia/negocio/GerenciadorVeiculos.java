@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.EmplacamentoDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.VeiculoDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
 
+@Component
 public class GerenciadorVeiculos implements RegrasVeiculos {
 
 	@Autowired
