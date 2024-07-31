@@ -1,6 +1,6 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.representacao;
 
-import java.sql.Date;
+
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
