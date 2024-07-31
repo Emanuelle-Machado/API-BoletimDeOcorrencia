@@ -6,9 +6,9 @@ import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 
 
 public interface EmplacamentoDAO {
-	void cadastrar(Emplacamento emplacamento);
+	void cadastrar(Emplacamento emplacamento, String idVeiculo);
 	void alterar(Emplacamento emplacamento);
-	void remover(String idEmplacamento);
-	Emplacamento consultar(String idEmplacamento);
+	void remover(String idVeiculo);
+	Emplacamento consultar(String idVeiculo);
 	List<Emplacamento> listarTodos();
 }
