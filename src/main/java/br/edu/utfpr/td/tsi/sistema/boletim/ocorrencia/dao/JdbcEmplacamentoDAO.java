@@ -20,8 +20,8 @@ public class JdbcEmplacamentoDAO implements EmplacamentoDAO {
 	public void cadastrar(Emplacamento emplacamento, String idVeiculo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into boletimocorrencia.emplacamento");
-		sql.append(" (placa, estado, cidade) ");
-		sql.append("values (:placa, :estado, :cidade)");
+		sql.append(" (placa, estado, cidade, idVeiculo) ");
+		sql.append("values (:placa, :estado, :cidade, :idVeiculo)");
 		
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("idVeiculo", idVeiculo);

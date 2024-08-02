@@ -1,16 +1,21 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.representacao;
 
-import java.sql.Date;
+
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
+import jakarta.persistence.Id;
 
 public class VeiculoRep {
+	
+	@Id
 	private String id;
+	
 	private String anoFabricacao;
 	private String cor;
 	private String marca;
 	private String tipoVeiculo;
+	
 	private String placa;
 	private String estado;
 	private String cidade;

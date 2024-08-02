@@ -23,11 +23,11 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 	public void cadastrar(Veiculo veiculo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into boletimocorrencia.veiculo");
-		sql.append("( id, anoFabricacao, cor, marca, tipoVeiculo )");
-		sql.append("values (:id, :anoFabricacao, :cor, :marca, :tipoVeiculo)");
+		sql.append("( idVeiculo, anoFabricacao, cor, marca, tipoVeiculo )");
+		sql.append("values (:idVeiculo, :anoFabricacao, :cor, :marca, :tipoVeiculo)");
 		
 		Map<String, Object> parametros = new HashMap<>();
-		parametros.put("id", veiculo.getId());
+		parametros.put("idVeiculo", veiculo.getId());
 		parametros.put("anoFabricacao", veiculo.getAnoFabricacao());
 		parametros.put("cor", veiculo.getCor());
 		parametros.put("marca", veiculo.getMarca());
@@ -48,7 +48,7 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 			public Veiculo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				
 				Veiculo veiculo = new Veiculo();
-				veiculo.setId(rs.getString("id"));
+				veiculo.setId(rs.getString("idVeiculo"));
 				veiculo.setAnoFabricacao(rs.getString("anoFabricacao"));
 				veiculo.setCor(rs.getString("cor"));
 				veiculo.setMarca(rs.getString("marca"));
