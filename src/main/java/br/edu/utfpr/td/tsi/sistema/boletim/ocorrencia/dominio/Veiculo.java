@@ -1,12 +1,20 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
 public class Veiculo {
 	
+	@Id
 	private String id;
+	
 	private String anoFabricacao;
 	private String cor;
 	private String marca;
 	private String tipoVeiculo;
+	
+	@OneToOne
 	private Emplacamento emplacamento;
 	
 	

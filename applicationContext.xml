@@ -1,0 +1,20 @@
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="JdbcEmplacamentoDAO" primary="false"
+		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcEmplacamentoDAO" />
+	<bean id="JdbcVeiculoDAO" primary="true"
+		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcVeiculoDAO" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/boletimocorrencia" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
+	</bean>
+</beans>
