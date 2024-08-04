@@ -4,17 +4,19 @@ package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.representacao;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
+import jakarta.persistence.Id;
 
 public class VeiculoRep {
+	
+	@Id
 	private String id;
+	
 	private String anoFabricacao;
 	private String cor;
 	private String marca;
 	private String tipoVeiculo;
-	private String placa;
-	private String estado;
-	private String cidade;
 	
+	private EmplacamentoRep emplacamento;
 	
 	public VeiculoRep() {}
 	
@@ -26,11 +28,9 @@ public class VeiculoRep {
 		this.marca = veiculo.getMarca();
 		this.tipoVeiculo = veiculo.getTipoVeiculo();
 		
-		if(veiculo.getEmplacamento() != null) {
-			this.placa = veiculo.getEmplacamento().getPlaca();
-			this.estado = veiculo.getEmplacamento().getEstado();
-			this.cidade = veiculo.getEmplacamento().getCidade();
-		}	
+		if (veiculo.getEmplacamento() != null) {
+            this.emplacamento = new EmplacamentoRep(veiculo.getEmplacamento());
+        }
 	}
 	
 	public Veiculo converterParaDominio() {
@@ -42,12 +42,9 @@ public class VeiculoRep {
 		veiculo.setMarca(this.marca);
 		veiculo.setTipoVeiculo(this.tipoVeiculo);
 		
-		Emplacamento emplacamento = new Emplacamento();
-		emplacamento.setPlaca(this.placa);
-		emplacamento.setEstado(this.estado);
-		emplacamento.setCidade(this.cidade);
-		
-		veiculo.setEmplacamento(emplacamento);
+		 if (this.emplacamento != null) {
+	            veiculo.setEmplacamento(this.emplacamento.converterParaDominio());
+	        }
 		
 		return veiculo;
 	}
@@ -82,24 +79,13 @@ public class VeiculoRep {
 	public void setTipoVeiculo(String tipoVeiculo) {
 		this.tipoVeiculo = tipoVeiculo;
 	}
-	public String getPlaca() {
-		return placa;
-	}
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+	public EmplacamentoRep getEmplacamento() {
+        return emplacamento;
+    }
+
+    public void setEmplacamento(EmplacamentoRep emplacamento) {
+        this.emplacamento = emplacamento;
+    }
 	
 	
 }

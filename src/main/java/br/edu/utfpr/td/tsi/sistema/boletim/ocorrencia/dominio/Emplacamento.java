@@ -1,19 +1,21 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+import jakarta.persistence.OneToOne;
+
 public class Emplacamento {
 	
-	private String idEmplacamento;
+	private String idVeiculo;
 	private String placa;
 	private String estado;
 	private String cidade;
 	
 	
 	
-	public String getIdEmplacamento() {
-		return idEmplacamento;
+	public String getIdVeiculo() {
+		return idVeiculo;
 	}
-	public void setIdEmplacamento(String idEmplacamento) {
-		this.idEmplacamento = idEmplacamento;
+	public void setIdVeiculo(String idVeiculo) {
+		this.idVeiculo = idVeiculo;
 	}
 	public String getPlaca() {
 		return placa;
@@ -33,6 +35,9 @@ public class Emplacamento {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	
+	@OneToOne
+	private Veiculo veiculo;
 	
 	
 }
