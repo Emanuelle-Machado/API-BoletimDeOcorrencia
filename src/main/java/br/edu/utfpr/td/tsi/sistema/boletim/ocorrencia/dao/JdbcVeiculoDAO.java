@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -73,8 +74,26 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 
 	@Override
 	public Veiculo consultar(String idVeiculo) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * ");
+		sql.append("from boletimocorrencia.veiculo ");
+		sql.append("where idVeiculo = :id");
+		
+		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
+		
+		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Veiculo>() {
+			@Override
+			public Veiculo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Veiculo veiculo = new Veiculo();
+				veiculo.setId(rs.getString("idVeiculo"));
+				veiculo.setAnoFabricacao(rs.getString("anoFabricacao"));
+				veiculo.setCor(rs.getString("cor"));
+				veiculo.setMarca(rs.getString("marca"));
+				veiculo.setTipoVeiculo(rs.getString("tipoVeiculo"));
+				
+				return veiculo;
+			}
+		});
 	}
 
 }
