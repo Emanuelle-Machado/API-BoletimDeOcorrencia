@@ -1,10 +1,14 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -46,8 +50,25 @@ public class JdbcEmplacamentoDAO implements EmplacamentoDAO {
 
 	@Override
 	public Emplacamento consultar(String idVeiculo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * ");
+		sql.append("from boletimocorrencia.emplacamento ");
+		sql.append("where idVeiculo= :id");
+		
+		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
+		
+		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Emplacamento>() {
+			@Override
+			public Emplacamento mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Emplacamento emplacamento = new Emplacamento();
+				emplacamento.setPlaca(rs.getString("placa"));
+				emplacamento.setCidade(rs.getString("cidade"));
+				emplacamento.setEstado(rs.getString("estado"));
+				
+				return emplacamento;
+			}
+		});
 	}
 
 	@Override
