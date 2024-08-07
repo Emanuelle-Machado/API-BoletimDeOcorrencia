@@ -37,11 +37,6 @@ public class JdbcEmplacamentoDAO implements EmplacamentoDAO {
 	}
 
 	@Override
-	public void alterar(Emplacamento emplacamento) {
-		
-	}
-
-	@Override
 	public void remover(String idVeiculo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("delete from boletimocorrencia.emplacamento ");
@@ -71,12 +66,6 @@ public class JdbcEmplacamentoDAO implements EmplacamentoDAO {
 				return emplacamento;
 			}
 		});
-	}
-
-	@Override
-	public List<Emplacamento> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

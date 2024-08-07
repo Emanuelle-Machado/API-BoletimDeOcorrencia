@@ -1,5 +1,7 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+import jakarta.persistence.OneToOne;
+
 public class Endereco {
 	
 	private String idEndereco;
@@ -46,5 +48,7 @@ public class Endereco {
 		this.estado = estado;
 	}
 	
+	@OneToOne
+	private BoletimFurtoVeiculo boletimFurtoVeiculo;
 	
 }
