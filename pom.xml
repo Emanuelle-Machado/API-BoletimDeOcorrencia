@@ -12,10 +12,7 @@
 		<version>3.2.3</version>
 		<relativePath />
 	</parent>
-<<<<<<< HEAD
-=======
 
->>>>>>> feat/consulta
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -23,10 +20,7 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
-<<<<<<< HEAD
-=======
 
->>>>>>> feat/consulta
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,31 +28,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-<<<<<<< HEAD
-=======
 			<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
->>>>>>> feat/consulta
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-<<<<<<< HEAD
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.37</version>
-		</dependency>
-
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-=======
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
@@ -121,14 +98,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
->>>>>>> feat/consulta
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-<<<<<<< HEAD
-=======
-
->>>>>>> feat/consulta
 </project>
