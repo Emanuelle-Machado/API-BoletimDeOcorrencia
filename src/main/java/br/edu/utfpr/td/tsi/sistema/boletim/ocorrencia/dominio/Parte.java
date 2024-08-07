@@ -1,5 +1,7 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+import jakarta.persistence.ManyToOne;
+
 public class Parte {
 	
 	private String idParte;
@@ -39,4 +41,7 @@ public class Parte {
 	public void setTipoEnvolvimento(String tipoEnvolvimento) {
 		this.tipoEnvolvimento = tipoEnvolvimento;
 	}
+	
+	@ManyToOne
+	private BoletimFurtoVeiculo boletimFurtoVeiculo;
 }
