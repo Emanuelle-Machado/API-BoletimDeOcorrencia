@@ -2,6 +2,7 @@ package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
 
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 public class Veiculo {
@@ -55,5 +56,7 @@ public class Veiculo {
 		this.tipoVeiculo = tipoVeiculo;
 	}
 	
+	@ManyToOne
+	private BoletimFurtoVeiculo boletimFurtoVeiculo;
 	
 }

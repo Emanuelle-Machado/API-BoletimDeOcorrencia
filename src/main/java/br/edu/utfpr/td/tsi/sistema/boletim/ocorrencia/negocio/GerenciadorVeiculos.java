@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.EmplacamentoDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.VeiculoDAO;
+import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
 
 @Component
@@ -36,22 +37,25 @@ public class GerenciadorVeiculos implements RegrasVeiculos {
 
 	@Override
 	public Veiculo consultar(String idVeiculo) {
-		// TODO Auto-generated method stub
-		return null;
+		Veiculo veiculo = veiculoDAO.consultar(idVeiculo);
+		Emplacamento emplacamento = emplacamentoDAO.consultar(idVeiculo);
+		veiculo.setEmplacamento(emplacamento);
+		return veiculo;
 	}
 
 	@Override
 	@Transactional
 	public void alterar(Veiculo veiculo) {
-		// TODO Auto-generated method stub
-		
+		veiculoDAO.alterar(veiculo);
+		emplacamentoDAO.remover(veiculo.getId());
+		emplacamentoDAO.cadastrar(veiculo.getEmplacamento(), veiculo.getId());	
 	}
 
 	@Override
 	@Transactional
 	public void remover(String idVeiculo) {
-		// TODO Auto-generated method stub
-		
+		emplacamentoDAO.remover(idVeiculo);
+		veiculoDAO.remover(idVeiculo);
 	}
 
 }

@@ -1,8 +1,6 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.representacao;
 
 
-
-import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
 import jakarta.persistence.Id;
 

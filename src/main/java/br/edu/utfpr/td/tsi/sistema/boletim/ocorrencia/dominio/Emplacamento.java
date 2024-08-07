@@ -9,8 +9,6 @@ public class Emplacamento {
 	private String estado;
 	private String cidade;
 	
-	
-	
 	public String getIdVeiculo() {
 		return idVeiculo;
 	}

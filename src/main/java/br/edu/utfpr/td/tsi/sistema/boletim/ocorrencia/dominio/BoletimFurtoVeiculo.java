@@ -1,20 +1,32 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 public class BoletimFurtoVeiculo {
 	
-	private String idBoletimFurtoVeiculo;
+	@Id
+	private String id;
+	
 	private String identificador;
 	private String dataOcorrencia;
 	private String periodoOcorrencia;
+	
+	@OneToMany
 	private Parte partes;
-	private Endereco localOcorrencia;
+	
+	@OneToMany
 	private Veiculo veiculoFurtado;
 	
+	@OneToOne
+	private Endereco localOcorrencia;
+	
 	public String getIdBoletimFurtoVeiculo() {
-		return idBoletimFurtoVeiculo;
+		return id;
 	}
-	public void setIdBoletimFurtoVeiculo(String idBoletimFurtoVeiculo) {
-		this.idBoletimFurtoVeiculo = idBoletimFurtoVeiculo;
+	public void setIdBoletimFurtoVeiculo(String id) {
+		this.id = id;
 	}
 	public String getIdentificador() {
 		return identificador;
