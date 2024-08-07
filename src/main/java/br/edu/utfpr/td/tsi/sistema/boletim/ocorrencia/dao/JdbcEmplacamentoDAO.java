@@ -38,14 +38,16 @@ public class JdbcEmplacamentoDAO implements EmplacamentoDAO {
 
 	@Override
 	public void alterar(Emplacamento emplacamento) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void remover(String idVeiculo) {
-		// TODO Auto-generated method stub
-		
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from boletimocorrencia.emplacamento ");
+		sql.append("where idVeiculo= :id");
+		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
+		jdbcTemplate.update(sql.toString(), params);
 	}
 
 	@Override

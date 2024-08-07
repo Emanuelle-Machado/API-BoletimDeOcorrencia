@@ -35,12 +35,16 @@ public class VeiculoEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response alterarVeiculo(VeiculoRep veiculo) {
-		return null;
+		veiculo.setId(idVeiculo);
+		Veiculo veiculoDominio = veiculo.converterParaDominio();
+		regrasVeiculos.alterar(veiculoDominio);
+		return Response.ok(new VeiculoRep(veiculoDominio)).build();
 	}
 	
 	@DELETE
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response removerVeiculo() {
-		return null;
+		regrasVeiculos.remover(idVeiculo);
+		return Response.ok("Veiculo removido com sucesso").build();
 	}
 }

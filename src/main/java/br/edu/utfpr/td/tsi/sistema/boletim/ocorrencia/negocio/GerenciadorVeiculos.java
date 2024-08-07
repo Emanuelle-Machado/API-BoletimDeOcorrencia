@@ -46,15 +46,16 @@ public class GerenciadorVeiculos implements RegrasVeiculos {
 	@Override
 	@Transactional
 	public void alterar(Veiculo veiculo) {
-		// TODO Auto-generated method stub
-		
+		veiculoDAO.alterar(veiculo);
+		emplacamentoDAO.remover(veiculo.getId());
+		emplacamentoDAO.cadastrar(veiculo.getEmplacamento(), veiculo.getId());	
 	}
 
 	@Override
 	@Transactional
 	public void remover(String idVeiculo) {
-		// TODO Auto-generated method stub
-		
+		emplacamentoDAO.remover(idVeiculo);
+		veiculoDAO.remover(idVeiculo);
 	}
 
 }
