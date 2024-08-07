@@ -62,13 +62,33 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 
 	@Override
 	public void alterar(Veiculo veiculo) {
-		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append("update boletimocorrencia.veiculo set ");
+		sql.append("anoFabricacao= :anoFabricacao, ");
+		sql.append("cor= :cor, ");
+		sql.append("marca= :marca, ");
+		sql.append("tipoVeiculo= :tipoVeiculo ");
+		sql.append("where idVeiculo = :id");
+
+		Map<String, Object> parametros = new HashMap<>();
+		
+		parametros.put("id", veiculo.getId());
+		parametros.put("anoFabricacao", veiculo.getAnoFabricacao());
+		parametros.put("cor", veiculo.getCor());
+		parametros.put("marca", veiculo.getMarca());
+		parametros.put("tipoVeiculo", veiculo.getTipoVeiculo());
+		
+		jdbcTemplate.update(sql.toString(), parametros);
 
 	}
 
 	@Override
 	public void remover(String idVeiculo) {
-		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from boletimocorrencia.veiculo ");
+		sql.append("where idVeiculo = :id");
+		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
+		jdbcTemplate.update(sql.toString(), params);
 
 	}
 
