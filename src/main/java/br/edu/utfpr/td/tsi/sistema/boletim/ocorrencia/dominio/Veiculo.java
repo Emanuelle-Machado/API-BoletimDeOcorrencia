@@ -56,7 +56,7 @@ public class Veiculo {
 		this.tipoVeiculo = tipoVeiculo;
 	}
 	
-	@ManyToOne
+	@OneToOne
 	private BoletimFurtoVeiculo boletimFurtoVeiculo;
 	
 }
