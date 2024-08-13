@@ -1,5 +1,7 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio;
 
+import java.util.Date;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
@@ -8,7 +10,7 @@ public class BoletimFurtoVeiculo {
 	@Id
 	private String id;
 	
-	private String dataOcorrencia;
+	private Date dataOcorrencia;
 	private String periodoOcorrencia;
 	
 	@OneToOne
@@ -26,14 +28,12 @@ public class BoletimFurtoVeiculo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public String getDataOcorrencia() {
+	public Date getDataOcorrencia() {
 		return dataOcorrencia;
 	}
-	public void setDataOcorrencia(String dataOcorrencia) {
+	public void setDataOcorrencia(Date dataOcorrencia) {
 		this.dataOcorrencia = dataOcorrencia;
 	}
-	
 	public String getPeriodoOcorrencia() {
 		return periodoOcorrencia;
 	}
