@@ -6,8 +6,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<bean id="JdbcEmplacamentoDAO" primary="false"
 		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcEmplacamentoDAO" />
-	<bean id="JdbcVeiculoDAO" primary="true"
+	<bean id="JdbcVeiculoDAO" primary="false"
 		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcVeiculoDAO" />
+	<bean id="JdbcBoletimFurtoVeiculoDAO" primary="true"
+		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcBoletimFurtoVeiculoDAO" />
+	<bean id="JdbcEnderecoDAO" primary="false"
+		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcEnderecoDAO" />
+	<bean id="JdbcParteDAO" primary="false"
+		class="br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.JdbcParteDAO" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
