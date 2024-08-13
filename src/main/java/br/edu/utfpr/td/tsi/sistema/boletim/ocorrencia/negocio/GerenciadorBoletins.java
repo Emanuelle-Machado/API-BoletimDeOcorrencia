@@ -39,7 +39,7 @@ public class GerenciadorBoletins implements RegrasBoletins {
 		boletimFurtoVeiculoDAO.cadastrar(boletim);
 		parteDAO.cadastrar(boletim.getParte(), idBoletim);
 		enderecoDAO.cadastrar(boletim.getLocalOcorrencia(), idBoletim);
-		//veiculoDAO.cadastrar(boletim.getVeiculoFurtado());
+		veiculoDAO.cadastrar(boletim.getVeiculoFurtado());
 	}
 
 	@Override
@@ -65,13 +65,25 @@ public class GerenciadorBoletins implements RegrasBoletins {
 	@Override
 	@Transactional
 	public void alterar(BoletimFurtoVeiculo boletim) {
+		boletimFurtoVeiculoDAO.alterar(boletim);
 		
+		parteDAO.remover(boletim.getId());
+		parteDAO.cadastrar(boletim.getParte(), boletim.getId());	
+		
+		enderecoDAO.remover(boletim.getId());
+		enderecoDAO.cadastrar(boletim.getLocalOcorrencia(), boletim.getId());
+		
+		veiculoDAO.remover(boletim.getId());
+		veiculoDAO.cadastrar(boletim.getVeiculoFurtado());
 	}
 
 	@Override
 	@Transactional
 	public void remover(String idBoletim) {
-		
+		parteDAO.remover(idBoletim);
+		enderecoDAO.remover(idBoletim);
+		veiculoDAO.remover(idBoletim);
+		boletimFurtoVeiculoDAO.remover(idBoletim);
 	}
 
 }
