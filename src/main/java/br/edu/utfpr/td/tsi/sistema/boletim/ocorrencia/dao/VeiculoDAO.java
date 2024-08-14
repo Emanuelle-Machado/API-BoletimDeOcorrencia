@@ -6,7 +6,7 @@ import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
 
 
 public interface VeiculoDAO {
-	void cadastrar(Veiculo veiculo);
+	void cadastrar(Veiculo veiculo, String idVeiculo);
 	void alterar(Veiculo veiculo);
 	void remover(String idVeiculo);
 	Veiculo consultar(String idVeiculo);

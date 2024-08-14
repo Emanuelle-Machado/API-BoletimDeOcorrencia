@@ -24,6 +24,9 @@ public class BoletimEndpoint {
 	@QueryParam("idBoletim")
 	private String idBoletim;
 	
+	@QueryParam("idVeiculo")
+	private String idVeiculo;
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response obterBoletim() {
@@ -34,7 +37,7 @@ public class BoletimEndpoint {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response alterarVeiculo(BoletimFurtoVeiculoRep boletim) {
+	public Response alterarBoletim(BoletimFurtoVeiculoRep boletim) {
 		boletim.setId(idBoletim);
 		BoletimFurtoVeiculo boletimDominio = boletim.converterParaDominio();
 		regrasBoletim.alterar(boletimDominio);
@@ -43,8 +46,8 @@ public class BoletimEndpoint {
 	
 	@DELETE
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response removerVeiculo() {
-		regrasBoletim.remover(idBoletim);
+	public Response removerBoletim() {
+		regrasBoletim.remover(idBoletim, idVeiculo);
 		return Response.ok("Boletim removido com sucesso").build();
 	}
 	

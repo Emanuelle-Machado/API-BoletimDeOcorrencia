@@ -21,7 +21,7 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Override
-	public void cadastrar(Veiculo veiculo) {
+	public void cadastrar(Veiculo veiculo, String idVeiculo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into boletimocorrencia.veiculo");
 		sql.append("( idVeiculo, anoFabricacao, cor, marca, tipoVeiculo )");

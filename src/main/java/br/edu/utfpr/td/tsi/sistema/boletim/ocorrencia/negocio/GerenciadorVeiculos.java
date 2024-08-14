@@ -26,7 +26,7 @@ public class GerenciadorVeiculos implements RegrasVeiculos {
 	public void cadastrar(Veiculo veiculo) {
 		String idVeiculo = UUID.randomUUID().toString();
 		veiculo.setId(idVeiculo);
-		veiculoDAO.cadastrar(veiculo);
+		veiculoDAO.cadastrar(veiculo, idVeiculo);
 		emplacamentoDAO.cadastrar(veiculo.getEmplacamento(), idVeiculo);
 	}
 

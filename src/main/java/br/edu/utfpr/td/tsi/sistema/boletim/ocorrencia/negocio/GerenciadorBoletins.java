@@ -1,5 +1,6 @@
 package br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.negocio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.EnderecoDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.ParteDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dao.VeiculoDAO;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.BoletimFurtoVeiculo;
+import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Emplacamento;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Endereco;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Parte;
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
@@ -33,13 +35,13 @@ public class GerenciadorBoletins implements RegrasBoletins {
 	
 	@Override
 	@Transactional
-	public void cadastrar(BoletimFurtoVeiculo boletim) {
+	public void cadastrar(BoletimFurtoVeiculo boletim, String idVeiculo) {
 		String idBoletim = UUID.randomUUID().toString();
 		boletim.setId(idBoletim);
 		boletimFurtoVeiculoDAO.cadastrar(boletim);
 		parteDAO.cadastrar(boletim.getParte(), idBoletim);
 		enderecoDAO.cadastrar(boletim.getLocalOcorrencia(), idBoletim);
-		veiculoDAO.cadastrar(boletim.getVeiculoFurtado());
+		veiculoDAO.cadastrar(boletim.getVeiculoFurtado(), idVeiculo);
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class GerenciadorBoletins implements RegrasBoletins {
 		
 		Parte parte = parteDAO.consultar(idBoletim);
 		Endereco endereco = enderecoDAO.consultar(idBoletim);
-		Veiculo veiculo = veiculoDAO.consultar(idBoletim);
+		Veiculo veiculo = veiculoDAO.consultar(boletim.getVeiculoFurtado().getId());
 		
 		boletim.setParte(parte);
 		boletim.setLocalOcorrencia(endereco);
@@ -74,16 +76,41 @@ public class GerenciadorBoletins implements RegrasBoletins {
 		enderecoDAO.cadastrar(boletim.getLocalOcorrencia(), boletim.getId());
 		
 		veiculoDAO.remover(boletim.getId());
-		veiculoDAO.cadastrar(boletim.getVeiculoFurtado());
+		veiculoDAO.cadastrar(boletim.getVeiculoFurtado(), boletim.getVeiculoFurtado().getId());
 	}
 
 	@Override
 	@Transactional
-	public void remover(String idBoletim) {
+	public void remover(String idBoletim, String idVeiculo) {
 		parteDAO.remover(idBoletim);
 		enderecoDAO.remover(idBoletim);
-		veiculoDAO.remover(idBoletim);
+		veiculoDAO.remover(idVeiculo);
 		boletimFurtoVeiculoDAO.remover(idBoletim);
+	}
+	
+	private void validarEmail(String email) {
+		String msgError = "Formato do email está incorreto";
+		throw new FormatoEmailException(msgError);
+	}
+
+	private void validarTelefone(String telefone) {
+		String msgError = "Formato do telefone está incorreto";
+		throw new FormatoTelefoneException(msgError);
+	}
+	
+	private void validarData(Date dataO) {
+		String msgError = "Formato da data de ocorrência está incorreto";
+		throw new FormatoTelefoneException(msgError);
+	}
+	
+	private void validarDadosObrigatorios(BoletimFurtoVeiculo boletim) {
+		String msgError = "Dados obrigatórios estão faltando";
+		throw new FormatoTelefoneException(msgError);
+	}
+	
+	private void validarPlaca(Emplacamento emplacamento) {
+		String msgError = "Formato da placa está incorreto";
+		throw new FormatoTelefoneException(msgError);
 	}
 
 }
