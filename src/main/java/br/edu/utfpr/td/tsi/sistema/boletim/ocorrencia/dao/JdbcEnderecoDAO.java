@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Endereco;
 
+@Component
 public class JdbcEnderecoDAO implements EnderecoDAO {
 
 	@Autowired

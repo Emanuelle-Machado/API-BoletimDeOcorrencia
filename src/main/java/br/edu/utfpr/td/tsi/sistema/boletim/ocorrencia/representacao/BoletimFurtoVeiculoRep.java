@@ -67,17 +67,17 @@ public class BoletimFurtoVeiculoRep {
 		return boletim;
 	}
 
-	private Date converterData(String dataTextual) {
-		DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-		DateTime dataConvertida = dtf.parseDateTime(dataTextual);
-		return dataConvertida.toDate();
-	}
+    private Date converterData(String dataTextual) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        DateTime dataConvertida = dtf.parseDateTime(dataTextual);
+        return dataConvertida.toDate();
+    }
 
-	private String serializarData(Date data) {
-		DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-		LocalDateTime dt = new LocalDateTime(data, DateTimeZone.UTC);
-		return dtf.print(dt);
-	}
+    private String serializarData(Date data) {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+        LocalDateTime dt = new LocalDateTime(data, DateTimeZone.UTC);
+        return dtf.print(dt);
+    }
 
 	public String getId() {
 		return id;
