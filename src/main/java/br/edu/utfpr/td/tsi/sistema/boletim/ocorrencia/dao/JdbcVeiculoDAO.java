@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
@@ -26,7 +27,7 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 		sql.append("insert into boletimocorrencia.veiculo");
 		sql.append("( idVeiculo, anoFabricacao, cor, marca, tipoVeiculo )");
 		sql.append("values (:idVeiculo, :anoFabricacao, :cor, :marca, :tipoVeiculo)");
-		
+
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("idVeiculo", veiculo.getId());
 		parametros.put("anoFabricacao", veiculo.getAnoFabricacao());
@@ -36,25 +37,25 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 
 		jdbcTemplate.update(sql.toString(), parametros);
 	}
-	
+
 	@Override
 	public List<Veiculo> listarTodos() {
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * from boletimocorrencia.veiculo");
-		
+
 		return jdbcTemplate.query(sql.toString(), new RowMapper<Veiculo>() {
-			
+
 			@Override
-			public Veiculo mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
+			public Veiculo mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+
 				Veiculo veiculo = new Veiculo();
 				veiculo.setId(rs.getString("idVeiculo"));
 				veiculo.setAnoFabricacao(rs.getString("anoFabricacao"));
 				veiculo.setCor(rs.getString("cor"));
 				veiculo.setMarca(rs.getString("marca"));
 				veiculo.setTipoVeiculo(rs.getString("tipoVeiculo"));
-				
+
 				return veiculo;
 			}
 		});
@@ -71,13 +72,13 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 		sql.append("where idVeiculo = :id");
 
 		Map<String, Object> parametros = new HashMap<>();
-		
+
 		parametros.put("id", veiculo.getId());
 		parametros.put("anoFabricacao", veiculo.getAnoFabricacao());
 		parametros.put("cor", veiculo.getCor());
 		parametros.put("marca", veiculo.getMarca());
 		parametros.put("tipoVeiculo", veiculo.getTipoVeiculo());
-		
+
 		jdbcTemplate.update(sql.toString(), parametros);
 
 	}
@@ -98,19 +99,19 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 		sql.append("select * ");
 		sql.append("from boletimocorrencia.veiculo ");
 		sql.append("where idVeiculo = :id");
-		
+
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
-		
+
 		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Veiculo>() {
 			@Override
-			public Veiculo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Veiculo mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
 				Veiculo veiculo = new Veiculo();
 				veiculo.setId(rs.getString("idVeiculo"));
 				veiculo.setAnoFabricacao(rs.getString("anoFabricacao"));
 				veiculo.setCor(rs.getString("cor"));
 				veiculo.setMarca(rs.getString("marca"));
 				veiculo.setTipoVeiculo(rs.getString("tipoVeiculo"));
-				
+
 				return veiculo;
 			}
 		});

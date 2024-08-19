@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Endereco;
@@ -18,14 +19,14 @@ public class JdbcEnderecoDAO implements EnderecoDAO {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
+
 	@Override
 	public void cadastrar(Endereco endereco, String idBoletim) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into boletimocorrencia.endereco");
 		sql.append(" (logradouro, numero, bairro, cidade, estado, idBoletim) ");
 		sql.append("values (:logradouro, :numero, :bairro, :cidade, :estado, :idBoletim)");
-		
+
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("idBoletim", idBoletim);
 		parametros.put("logradouro", endereco.getLogradouro());
@@ -33,8 +34,7 @@ public class JdbcEnderecoDAO implements EnderecoDAO {
 		parametros.put("bairro", endereco.getBairro());
 		parametros.put("cidade", endereco.getCidade());
 		parametros.put("estado", endereco.getEstado());
-		
-	
+
 		jdbcTemplate.update(sql.toString(), parametros);
 	}
 
@@ -53,19 +53,19 @@ public class JdbcEnderecoDAO implements EnderecoDAO {
 		sql.append("select * ");
 		sql.append("from boletimocorrencia.endereco ");
 		sql.append("where idBoletim= :id");
-		
+
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idBoletim);
-		
+
 		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Endereco>() {
 			@Override
-			public Endereco mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Endereco mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
 				Endereco endereco = new Endereco();
 				endereco.setLogradouro(rs.getString("logradouro"));
 				endereco.setNumero(rs.getInt("numero"));
 				endereco.setBairro(rs.getString("bairro"));
 				endereco.setCidade(rs.getString("cidade"));
 				endereco.setEstado(rs.getString("estado"));
-				
+
 				return endereco;
 			}
 		});
