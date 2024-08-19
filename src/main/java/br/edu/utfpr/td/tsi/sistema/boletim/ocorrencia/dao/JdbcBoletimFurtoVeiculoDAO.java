@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -14,6 +15,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.BoletimFurtoVeiculo;
+import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.negocio.BoletimNaoEncontradoException;
 
 @Component
 public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
@@ -71,7 +73,10 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 		parametros.put("dataOcorrencia", boletim.getDataOcorrencia());
 		parametros.put("periodoOcorrencia", boletim.getPeriodoOcorrencia());
 
-		jdbcTemplate.update(sql.toString(), parametros);
+		int update = jdbcTemplate.update(sql.toString(), parametros);
+		if (update == 0) {
+		throw new BoletimNaoEncontradoException("Boletim nao encontrado");
+		}
 	}
 
 	@Override
@@ -80,7 +85,12 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 		sql.append("delete from boletimocorrencia.boletimfurtoveiculo ");
 		sql.append("where idBoletim = :id");
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idBoletim);
-		jdbcTemplate.update(sql.toString(), params);
+		
+		int removido = jdbcTemplate.update(sql.toString(), params);
+		if (removido == 0) {
+		String msgErro = "Contato nao encontrado";
+		throw new BoletimNaoEncontradoException(msgErro);
+		}
 	}
 
 	@Override
@@ -91,18 +101,23 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 		sql.append("where idBoletim = :id");
 
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idBoletim);
+		
+		try {
+			return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<BoletimFurtoVeiculo>() {
+				@Override
+				public BoletimFurtoVeiculo mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+					BoletimFurtoVeiculo boletim = new BoletimFurtoVeiculo();
+					boletim.setId(rs.getString("idBoletim"));
+					boletim.setDataOcorrencia(rs.getDate("dataOcorrencia"));
+					boletim.setPeriodoOcorrencia(rs.getString("periodoOcorrencia"));
 
-		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<BoletimFurtoVeiculo>() {
-			@Override
-			public BoletimFurtoVeiculo mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
-				BoletimFurtoVeiculo boletim = new BoletimFurtoVeiculo();
-				boletim.setId(rs.getString("idBoletim"));
-				boletim.setDataOcorrencia(rs.getDate("dataOcorrencia"));
-				boletim.setPeriodoOcorrencia(rs.getString("periodoOcorrencia"));
-
-				return boletim;
-			}
-		});
+					return boletim;
+				}
+			});
+		} catch (IncorrectResultSizeDataAccessException e) {
+			String msgErro = "Boletim nao encontrado";
+			throw new BoletimNaoEncontradoException(msgErro);
+		}
 	}
 
 }
