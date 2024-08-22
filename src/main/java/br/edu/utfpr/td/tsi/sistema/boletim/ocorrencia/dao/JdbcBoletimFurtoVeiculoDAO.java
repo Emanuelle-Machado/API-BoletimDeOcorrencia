@@ -75,7 +75,7 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 
 		int update = jdbcTemplate.update(sql.toString(), parametros);
 		if (update == 0) {
-		throw new BoletimNaoEncontradoException("Boletim nao encontrado");
+			throw new BoletimNaoEncontradoException("Boletim nao encontrado");
 		}
 	}
 
@@ -85,11 +85,11 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 		sql.append("delete from boletimocorrencia.boletimfurtoveiculo ");
 		sql.append("where idBoletim = :id");
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idBoletim);
-		
+
 		int removido = jdbcTemplate.update(sql.toString(), params);
 		if (removido == 0) {
-		String msgErro = "Contato nao encontrado";
-		throw new BoletimNaoEncontradoException(msgErro);
+			String msgErro = "Boletim nao encontrado";
+			throw new BoletimNaoEncontradoException(msgErro);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class JdbcBoletimFurtoVeiculoDAO implements BoletimFurtoVeiculoDAO {
 		sql.append("where idBoletim = :id");
 
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idBoletim);
-		
+
 		try {
 			return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<BoletimFurtoVeiculo>() {
 				@Override

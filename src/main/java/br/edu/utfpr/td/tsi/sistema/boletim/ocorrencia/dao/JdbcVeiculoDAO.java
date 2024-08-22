@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -14,6 +15,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.dominio.Veiculo;
+import br.edu.utfpr.td.tsi.sistema.boletim.ocorrencia.negocio.VeiculoNaoEncontradoException;
 
 @Component
 public class JdbcVeiculoDAO implements VeiculoDAO {
@@ -79,8 +81,10 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 		parametros.put("marca", veiculo.getMarca());
 		parametros.put("tipoVeiculo", veiculo.getTipoVeiculo());
 
-		jdbcTemplate.update(sql.toString(), parametros);
-
+		int update = jdbcTemplate.update(sql.toString(), parametros);
+		if(update == 0) {
+			throw new VeiculoNaoEncontradoException("Veiculo não encontrado");
+		}
 	}
 
 	@Override
@@ -89,8 +93,10 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 		sql.append("delete from boletimocorrencia.veiculo ");
 		sql.append("where idVeiculo = :id");
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
-		jdbcTemplate.update(sql.toString(), params);
-
+		int removido = jdbcTemplate.update(sql.toString(), params);
+		if(removido == 0) {
+			throw new VeiculoNaoEncontradoException("Veiculo não encontrado");
+		}
 	}
 
 	@Override
@@ -102,7 +108,8 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 
 		MapSqlParameterSource params = new MapSqlParameterSource("id", idVeiculo);
 
-		return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Veiculo>() {
+		try {
+			return jdbcTemplate.queryForObject(sql.toString(), params, new RowMapper<Veiculo>() {
 			@Override
 			public Veiculo mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
 				Veiculo veiculo = new Veiculo();
@@ -115,6 +122,11 @@ public class JdbcVeiculoDAO implements VeiculoDAO {
 				return veiculo;
 			}
 		});
+		} catch (IncorrectResultSizeDataAccessException e) {
+			String msgErro = "Veiculo nao encontrado";
+			throw new VeiculoNaoEncontradoException(msgErro);
+		}
+		
 	}
 
 }
